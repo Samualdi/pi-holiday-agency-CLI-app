@@ -1,10 +1,10 @@
 const axios = require("axios");
 
-exports.planTripToAirport = (passengers, distance) => {
-  if (distance === 0) return 0;
+exports.planTripToAirport = (passengers, distanceToAirport) => {
+  if (distanceToAirport === 0) return 0; //is this needed
   let numberOfVechiles = Math.ceil(passengers / 4);
-  const costOfCar = (3 + 0.2 * distance) * numberOfVechiles;
-  const costOfTaxi = 0.4 * distance * numberOfVechiles;
+  const costOfCar = (3 + 0.2 * distanceToAirport) * numberOfVechiles;
+  const costOfTaxi = 0.4 * distanceToAirport * numberOfVechiles;
 
   if (costOfCar > costOfTaxi) {
     return {
@@ -16,7 +16,7 @@ exports.planTripToAirport = (passengers, distance) => {
       modeOfTransport: "Car",
       cost: costOfCar,
     };
-  } else if (costofCar === costOfTaxi) {
+  } else if (costOfCar === costOfTaxi) {
     return {
       modeOfTransport: "Car or Taxi",
       cost: costOfCar,
