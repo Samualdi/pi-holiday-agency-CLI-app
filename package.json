@@ -1,0 +1,27 @@
+{
+  "name": "pi-holiday-agency-cli-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samualdi/pi-holiday-agency-CLI-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Samualdi/pi-holiday-agency-CLI-app/issues"
+  },
+  "homepage": "https://github.com/Samualdi/pi-holiday-agency-CLI-app#readme",
+  "devDependencies": {
+    "jest": "^27.2.4"
+  },
+  "dependencies": {
+    "axios": "^0.22.0",
+    "inquirer": "^8.1.5"
+  }
+}
