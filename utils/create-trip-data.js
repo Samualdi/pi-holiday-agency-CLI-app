@@ -5,7 +5,7 @@ exports.createTripData = async (distanceToAirport, passengers, originAirport, de
     const flightData = await findShortestFlights(originAirport, destinationAirport)
     const tripToAirport = planTripToAirport(passengers, distanceToAirport);
 
-    const totalCost = tripToAirport.cost + ((flightData.outboundFlight.totalMiles + flightData.inboundFlight.totalMiles) * 0.1);
+    const totalCost = tripToAirport.cost + ((flightData.outboundFlight.totalMiles + flightData.inboundFlight.totalMiles) * 0.1 * passengers);
 
     const tripData = {
         flightData: flightData,
