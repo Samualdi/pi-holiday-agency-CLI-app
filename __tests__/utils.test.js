@@ -1,6 +1,7 @@
 const { findShortestFlights } = require('../utils/find-shortest-flights');
 const { planTripToAirport } = require('../utils/plan-trip-to-airport');
 const { createTripData } = require('../utils/create-trip-data');
+const { getAirportData } = require('../utils/get-airport-data');
 
 describe("planTripToAirport", () => {
   test("returns 0 when passed a distance of 0", () => {
@@ -108,3 +109,15 @@ describe('createTripData', () => {
     expect(actual).toEqual(expected);
   });
 })
+
+describe('getAirportData', () => {
+  test('returns an array of strings with airport code: airport name for all airports accessible in the API (sorted by airport code)', async () => {
+    const airportData = await getAirportData();
+    console.log(airportData.length);
+    expect(airportData.length).toBe(20)
+    expect(airportData).toBeSorted();
+
+    
+  });
+  
+});
