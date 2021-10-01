@@ -18,10 +18,14 @@
   },
   "homepage": "https://github.com/Samualdi/pi-holiday-agency-CLI-app#readme",
   "devDependencies": {
-    "jest": "^27.2.4"
+    "jest": "^27.2.4",
+    "jest-sorted": "^1.0.12"
   },
   "dependencies": {
     "axios": "^0.22.0",
     "inquirer": "^8.1.5"
-  }
+  },
+  "jest": {
+  "setupFilesAfterEnv": ["jest-sorted"]
+}
 }
