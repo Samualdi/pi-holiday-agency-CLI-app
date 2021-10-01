@@ -32,8 +32,8 @@ inquirer
     },
   ])
   .then((answers) => {
-    const originAirport = answers.originAirport.substring(0, 3);
-    const destinationAirport = answers.destinationAirport.substring(0, 3);
+    const originAirport = answers.originAirport.substring(answers.originAirport.length -3, answers.originAirport.length);
+    const destinationAirport = answers.destinationAirport.substring(answers.destinationAirport.length -3, answers.destinationAirport.length);
     return createTripData(
       answers.distanceToAirport,
       answers.passengers,

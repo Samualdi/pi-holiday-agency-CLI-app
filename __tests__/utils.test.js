@@ -104,7 +104,7 @@ describe('createTripData', () => {
         inboundFlight: { journey: ['DME', 'LED', 'OSL'], totalMiles: 510 },
       },
       tripToAirport: { modeOfTransport: "Car", cost: 33 },
-      totalCost: "134.50",
+      totalCost: "439.00",
     };
     expect(actual).toEqual(expected);
   });
