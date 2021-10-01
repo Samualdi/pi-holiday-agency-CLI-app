@@ -90,3 +90,21 @@ describe('findShortestFlights', () => {
     
 });
 
+describe('createTripData', () => {
+  test('returns a tripData object with properties that include flightData, information about the trip to the airport and total trip cost when passed valid arguments', async () => {
+    const passengers = 4;
+    const distanceToAirport = 150;
+    const originAirport = 'OSL';
+    const destinationAirport = 'DME';
+    const actual = await createTripData(distanceToAirport, passengers, originAirport, destinationAirport);
+    const expected = {
+      flightData: {
+        outboundFlight: { journey: ['OSL', 'LED', 'SVO', 'DME'], totalMiles: 505 },
+        inboundFlight: { journey: ['DME', 'LED', 'OSL'], totalMiles: 510 },
+      },
+      tripToAirport: { modeOfTransport: "Car", cost: 33 },
+      totalCost: "134.50",
+    };
+    expect(actual).toEqual(expected);
+  });
+})
