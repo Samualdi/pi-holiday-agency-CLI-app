@@ -2,6 +2,7 @@ const { findShortestFlights } = require('../utils/find-shortest-flights');
 const { planTripToAirport } = require('../utils/plan-trip-to-airport');
 const { createTripData } = require('../utils/create-trip-data');
 const { getAirportData } = require('../utils/get-airport-data');
+const { translateAirportCodes } = require('../utils/translate-airport-codes');
 
 describe("planTripToAirport", () => {
   test("returns 0 when passed a distance of 0", () => {
@@ -100,8 +101,8 @@ describe('createTripData', () => {
     const actual = await createTripData(distanceToAirport, passengers, originAirport, destinationAirport);
     const expected = {
       flightData: {
-        outboundFlight: { journey: ['OSL', 'LED', 'SVO', 'DME'], totalMiles: 505 },
-        inboundFlight: { journey: ['DME', 'LED', 'OSL'], totalMiles: 510 },
+        outboundFlight: { journey: ['Oslo Airport, Gardermoen' ,'Pulkovo Airport', 'Sheremetyevo International Airport', 'Moscow Domodedovo Airport'], totalMiles: 505 },
+        inboundFlight: { journey: ['Moscow Domodedovo Airport', 'Pulkovo Airport', 'Oslo Airport, Gardermoen'], totalMiles: 510 },
       },
       tripToAirport: { modeOfTransport: "Car", cost: 33 },
       totalCost: "439.00",
@@ -117,7 +118,19 @@ describe('getAirportData', () => {
     expect(airportData.length).toBe(20)
     expect(airportData).toBeSorted();
 
+  });
+  
+});
+
+describe('translateAirportCodes', () => {
+  test('returns a n array of airport names translated from the input array of airport codes', async () => {
+    const airportCodeArray = ['DME', 'OSL', 'LHR'];
+    const actual = await translateAirportCodes(airportCodeArray);
+    const expected = ["Moscow Domodedovo Airport", "Oslo Airport, Gardermoen", "Heathrow Airport"];
     
+    expect(actual).toEqual(expected);
+
+
   });
   
 });
