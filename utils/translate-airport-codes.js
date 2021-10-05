@@ -8,12 +8,8 @@ exports.translateAirportCodes = async (airportCodeArray) => {
     airportData.data.forEach((airport) => {
         refObject[airport.id] = airport.name;
     });
-  
-
     const translatedArray = airportCodeArray.map(airportCode => {
         return refObject[airportCode];
-      
-    })
+    });
     return translatedArray; 
 }
-

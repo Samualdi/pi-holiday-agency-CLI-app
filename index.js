@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const { createTripData } = require('./utils/create-trip-data');
-const { getAirportData} = require('./utils/get-airport-data');
+const { getAirportData } = require('./utils/get-airport-data');
+
 
 inquirer
   .prompt([
@@ -8,11 +9,25 @@ inquirer
       name: "distanceToAirport",
       message: `How far away is your origin airport?`,
       type: "number",
+      validate: function (input) {
+        if (input > 0) {
+          return true;
+        } else {
+          return 'Must be a number greater than 0';
+        }
+      }
     },
     {
       name: "passengers",
       message: "How many passengers are travelling?",
       type: "number",
+      validate: function (input) {
+        if (input > 0) {
+          return true;
+        } else {
+          return "Must be a number greater than 0";
+        }
+      }
     },
     {
       name: "originAirport",

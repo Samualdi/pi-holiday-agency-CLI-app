@@ -5,15 +5,6 @@ const { getAirportData } = require('../utils/get-airport-data');
 const { translateAirportCodes } = require('../utils/translate-airport-codes');
 
 describe("planTripToAirport", () => {
-  test("returns 0 when passed a distance of 0", () => {
-    const distanceToAirport = 0;
-    const passengers = 2;
-    const actual = planTripToAirport(passengers, distanceToAirport);
-    const expected = 0;
-
-    expect(actual).toBe(expected);
-  });
-
   test("returns the cheapest mode of transport and its cost whe passed a valid distance and a passenger value of less than 4 (a single car)", () => {
     let distanceToAirport = 100;
     let passengers = 3;
@@ -73,8 +64,8 @@ describe("planTripToAirport", () => {
 
 describe('findShortestFlights', () => {
     test('returns flight data (route and totalMiles) for inbound and outbound flights when passed valid origin and departure airports', async () => {
-        const originAirport = 'OSL';
-        const destinationAirport = 'DME';
+        const originAirport = "OSL";
+        const destinationAirport = "DME";
       const actual = await findShortestFlights(originAirport, destinationAirport);
       const expected = {
         outboundFlight: {
@@ -96,13 +87,13 @@ describe('createTripData', () => {
   test('returns a tripData object with properties that include flightData, information about the trip to the airport and total trip cost when passed valid arguments', async () => {
     const passengers = 4;
     const distanceToAirport = 150;
-    const originAirport = 'OSL';
-    const destinationAirport = 'DME';
+    const originAirport = "OSL";
+    const destinationAirport = "DME";
     const actual = await createTripData(distanceToAirport, passengers, originAirport, destinationAirport);
     const expected = {
       flightData: {
-        outboundFlight: { journey: ['Oslo Airport, Gardermoen' ,'Pulkovo Airport', 'Sheremetyevo International Airport', 'Moscow Domodedovo Airport'], totalMiles: 505 },
-        inboundFlight: { journey: ['Moscow Domodedovo Airport', 'Pulkovo Airport', 'Oslo Airport, Gardermoen'], totalMiles: 510 },
+        outboundFlight: { journey: ["Oslo Airport, Gardermoen" ,"Pulkovo Airport", "Sheremetyevo International Airport", "Moscow Domodedovo Airport"], totalMiles: 505 },
+        inboundFlight: { journey: ["Moscow Domodedovo Airport", "Pulkovo Airport", "Oslo Airport, Gardermoen"], totalMiles: 510 },
       },
       tripToAirport: { modeOfTransport: "Car", cost: 33 },
       totalCost: "439.00",
@@ -114,23 +105,26 @@ describe('createTripData', () => {
 describe('getAirportData', () => {
   test('returns an array of strings with airport code: airport name for all airports accessible in the API (sorted by airport code)', async () => {
     const airportData = await getAirportData();
-    console.log(airportData.length);
+    console.log(airportData);
     expect(airportData.length).toBe(20)
-    expect(airportData).toBeSorted();
 
+      expect(airportData).toBeSorted();
+    });
   });
-  
-});
 
-describe('translateAirportCodes', () => {
-  test('returns a n array of airport names translated from the input array of airport codes', async () => {
-    const airportCodeArray = ['DME', 'OSL', 'LHR'];
-    const actual = await translateAirportCodes(airportCodeArray);
-    const expected = ["Moscow Domodedovo Airport", "Oslo Airport, Gardermoen", "Heathrow Airport"];
+  describe('translateAirportCodes', () => {
+    test('returns an array with a single airort name translated from an inpiut array witha  single airport code', async () => {
+      const airportCodeArray = ["LHR"];
+      const actual = await translateAirportCodes(airportCodeArray);
+      const expected = ["Heathrow Airport"];
     
-    expect(actual).toEqual(expected);
-
-
-  });
+    });
   
-});
+    test('returns an array of multiple airport names correctly translated from the input array of airport codes', async () => {
+      const airportCodeArray = ["DME", "OSL", "LHR"];
+      const actual = await translateAirportCodes(airportCodeArray);
+      const expected = ["Moscow Domodedovo Airport", "Oslo Airport, Gardermoen", "Heathrow Airport"];
+    
+      expect(actual).toEqual(expected);
+    });
+  });
