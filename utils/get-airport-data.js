@@ -4,5 +4,7 @@ exports.getAirportData = async () => {airportData = await axios("https://7302hta
     const airportIdNameArray = airportData.data.map(airport => {
         return `${airport.name}: ${airport.id}`;
     })
+    
     return airportIdNameArray.sort();
+
 }

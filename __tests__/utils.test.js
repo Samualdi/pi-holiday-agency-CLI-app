@@ -105,7 +105,6 @@ describe('createTripData', () => {
 describe('getAirportData', () => {
   test('returns an array of strings with airport code: airport name for all airports accessible in the API (sorted by airport code)', async () => {
     const airportData = await getAirportData();
-    console.log(airportData);
     expect(airportData.length).toBe(20)
 
       expect(airportData).toBeSorted();
